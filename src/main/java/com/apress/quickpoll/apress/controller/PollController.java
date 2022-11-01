@@ -26,32 +26,29 @@ public class PollController {
     private PollService pollService;
 
 
-    @RequestMapping(value="/polls", method= RequestMethod.GET)
+    @GetMapping("/polls")
     public ResponseEntity<Iterable<Poll>> getAllPolls() {
         return  pollService.getAllPolls();
     }
 
-    @RequestMapping(value="/polls/{pollId}", method=RequestMethod.GET)
+    @GetMapping("/polls/{pollId}")
     public ResponseEntity<?> getPoll(@PathVariable Long pollId) {
         return pollService.getPoll(pollId);
     }
 
-    @RequestMapping(value="/polls", method=RequestMethod.POST)
+    @PostMapping(value="/polls")
     public ResponseEntity<?> createPoll(@Valid @RequestBody Poll poll) {
         return pollService.createPoll(poll);
     }
 
-    @RequestMapping(value="/polls/{pollId}", method=RequestMethod.PUT)
+    @PutMapping("/polls/{pollId}")
     public ResponseEntity<?> updatePoll(@RequestBody Poll poll, @PathVariable Long pollId) {
         return pollService.updatePoll(poll,pollId);
     }
 
-    @RequestMapping(value="/polls/{pollId}", method=RequestMethod.DELETE)
+    @DeleteMapping("/polls/{pollId}")
     public ResponseEntity<?> deletePoll(@PathVariable Long pollId) {
         return pollService.deletePoll(pollId);
     }
-//    @RequestMapping(value="/polls/{pollId}", method=RequestMethod.GET)
-//    public void verifyPoll(Long pollId) {
-//       pollService.verifyPoll(pollId);
-//    }
+
 }

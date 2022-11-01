@@ -31,9 +31,6 @@ public class PollService {
     public ResponseEntity<?> getPoll(@PathVariable Long pollId) {
         verifyPoll(pollId);
         Optional<Poll> p = pollRepository.findById(pollId);
-        if(p == null) {
-            throw new ResourceNotFoundException("Poll with id " + pollId + " not found");
-        }
         return new ResponseEntity<> (p, HttpStatus.OK);
     }
 
@@ -57,6 +54,7 @@ public class PollService {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+
     public ResponseEntity<?> deletePoll(@PathVariable Long pollId) {
         verifyPoll(pollId);
         pollRepository.deleteById(pollId);
@@ -64,7 +62,7 @@ public class PollService {
     }
 
     public void verifyPoll(Long pollId) throws ResourceNotFoundException{
-        Optional<Poll> poll = pollRepository.findById(pollId);
+        Poll poll = pollRepository.findById(pollId).orElse(null);
         if(poll == null){
             throw new ResourceNotFoundException("Poll with id " + pollId + " not found");
         }

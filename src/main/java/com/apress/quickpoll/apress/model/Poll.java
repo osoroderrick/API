@@ -13,7 +13,7 @@ public class Poll {
     private Long id;
 
     @Column(name = "QUESTION",nullable = false)
-    @NotEmpty
+    @NotEmpty(message = "Question is a required field")
     private String question;
 
     @OneToMany(cascade = CascadeType.ALL)
